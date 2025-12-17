@@ -1,50 +1,68 @@
-import { getAllPosts } from "@/lib/api";
-import Image from "next/image"
-import { default as NextLink } from "next/link";
+import Post from "@/components/post"
+import { getAllPosts } from "@/lib/api"
+import { PostType } from "@/types"
+import { Constants } from "@fefade/core"
 
 export default function () {
-  const allPosts = getAllPosts();
+	const allPosts = getAllPosts()
 
-  const heroPost = allPosts[0];
+	// const heroPost = allPosts[0]
 
-  const morePosts = allPosts.slice(1);
+	// const morePosts = allPosts.slice(1)
 
-  return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "4rem", justifyItems: "center" }}>
-      {allPosts.map((post, index) => (
-        <NextLink
-          key={index}
-          href={`/posts/${post.slug}`}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            maxWidth: "100%",
-            gap: "0.5rem"
-          }}
-        >
-          <Image
-            alt={post.title}
-            src={post.coverImage}
-            width={600}
-            height={340}
-            style={{
-              width: "100%",
-              height: "auto",
-              borderRadius: "0.5rem",
-              objectFit: "cover",
-            }}
-          />
+	const postsByCategory: Record<string, PostType[]> = allPosts.reduce(
+		(acc, post) => {
+			const category = post.categories?.[0] || ""
 
-          <h2 style={{ margin: 0 }}>
-            {post.title}
-          </h2>
+			if (!acc[category]) acc[category] = []
+			acc[category].push(post)
 
-          <p className="muted">
-            {post.excerpt}
-          </p>
-        </NextLink>
-      ))}
-    </div>
-  );
+			return acc
+		},
+		{} as Record<string, PostType[]>
+	)
+
+	return (
+		<div>
+			{Object.entries(postsByCategory).map(([category, posts]) => (
+				<div
+					key={category}
+					style={{ display: "flex", gap: "1rem", flexDirection: "column" }}
+				>
+					{category !== "" && (
+						<div style={{ position: "relative" }}>
+							<h1
+								style={{
+									borderBottom: `1px solid ${Constants.themeColorVar.primary}`
+								}}
+							>
+								{category}
+							</h1>
+							<div
+								style={{
+									width: "30px",
+									height: "5px",
+									background: Constants.themeColorVar.primary
+								}}
+							></div>
+						</div>
+					)}
+
+					<div
+						style={{
+							display: "grid",
+							gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+							gap: "2rem",
+							justifyItems: "center"
+						}}
+					>
+						{posts.map((post) => (
+							<Post key={post.slug} data={post} />
+						))}
+					</div>
+					<br />
+				</div>
+			))}
+		</div>
+	)
 }
