@@ -1,5 +1,5 @@
 "use client"
-import { Link, Provider } from "@fefade/react"
+import { Link, Provider } from "@fefade-ui/react"
 import { PropsWithChildren } from "react"
 import { default as NextLink } from "next/link"
 

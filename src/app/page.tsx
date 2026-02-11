@@ -1,7 +1,7 @@
 import Post from "@/components/post"
 import { getAllPosts } from "@/lib/api"
 import { PostType } from "@/types"
-import { Constants } from "@fefade/core"
+import { Constants } from "@fefade-ui/core"
 
 export default function () {
 	const allPosts = getAllPosts()

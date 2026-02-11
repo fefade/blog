@@ -1,6 +1,6 @@
 "use client"
 import { PostType } from "@/types"
-import { Card } from "@fefade/react"
+import { Card } from "@fefade-ui/react"
 import Image from "next/image"
 import { default as NextLink } from "next/link"
 

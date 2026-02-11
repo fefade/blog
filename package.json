@@ -1,6 +1,6 @@
 {
 	"name": "blog",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
@@ -10,11 +10,11 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"@fefade/core": "^0.0.4",
-		"@fefade/react": "^0.0.4",
+		"@fefade-ui/core": "^0.0.1",
+		"@fefade-ui/react": "^0.0.1",
 		"date-fns": "^4.1.0",
 		"gray-matter": "^4.0.3",
-		"next": "^16.0.10",
+		"next": "^16.1.6",
 		"react": "19.2.0",
 		"react-dom": "19.2.0",
 		"remark": "^15.0.1",

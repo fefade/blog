@@ -1,5 +1,5 @@
 "use client"
-import { Avatar } from "@fefade/react"
+import { Avatar } from "@fefade-ui/react"
 
 type Props = {
 	name: string
